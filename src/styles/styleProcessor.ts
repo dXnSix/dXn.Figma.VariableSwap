@@ -54,7 +54,7 @@ async function processStrokeStyle(
   if (!('strokeStyleId' in node)) return 0;
 
   const styleId = node.strokeStyleId;
-  if (!styleId || styleId === '' || styleId === figma.mixed) return 0;
+  if (!styleId || styleId === '') return 0;
 
   const currentStyle = await figma.getStyleByIdAsync(styleId);
   if (!currentStyle) return 0;
@@ -120,7 +120,7 @@ async function processEffectStyle(
   if (!('effectStyleId' in node)) return 0;
 
   const styleId = node.effectStyleId;
-  if (!styleId || styleId === '' || styleId === figma.mixed) return 0;
+  if (!styleId || styleId === '') return 0;
 
   const currentStyle = await figma.getStyleByIdAsync(styleId);
   if (!currentStyle) return 0;
@@ -153,7 +153,7 @@ async function processGridStyle(
   if (!('gridStyleId' in node)) return 0;
 
   const styleId = node.gridStyleId;
-  if (!styleId || styleId === '' || styleId === figma.mixed) return 0;
+  if (!styleId || styleId === '') return 0;
 
   const currentStyle = await figma.getStyleByIdAsync(styleId);
   if (!currentStyle) return 0;
