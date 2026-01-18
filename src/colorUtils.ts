@@ -19,7 +19,7 @@ export function tryParseColor(source: string): RGB | null {
   try {
     const rgba = figma.util.rgba(source);
     return { r: rgba.r, g: rgba.g, b: rgba.b };
-  } catch (error) {
+  } catch {
     return null;
   }
 }

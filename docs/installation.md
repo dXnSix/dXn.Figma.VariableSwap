@@ -1,5 +1,21 @@
 # Installation & Usage
 
+## IMPORTANT: Why This Repo Requires pnpm
+
+This project uses [pnpm](https://pnpm.io/) instead of npm or yarn. **Do not use npm or yarn to install dependencies.**
+
+The plugin uses `esbuild`, which includes platform-specific native binaries. This project is developed across multiple environments (Windows x64, Windows ARM64, and WSL2/Linux), and pnpm's `supportedArchitectures` feature (configured in `.npmrc`) ensures the correct binaries are installed for all platforms simultaneously.
+
+Using npm would install binaries for only one platform, causing build failures when switching between Windows and WSL.
+
+### Installing pnpm
+
+```bash
+npm install -g pnpm
+```
+
+---
+
 ## Installation
 
 ### For Development
@@ -7,11 +23,11 @@
 1. Clone or download the plugin repository
 2. Install dependencies:
    ```bash
-   npm install
+   pnpm install
    ```
 3. Build the plugin:
    ```bash
-   npm run build
+   pnpm run build
    ```
 4. In Figma, go to **Plugins > Development > Import plugin from manifest...**
 5. Select the `dist/manifest.json` file
@@ -20,7 +36,7 @@
 
 1. Build the plugin:
    ```bash
-   npm run build
+   pnpm run build
    ```
 2. The `dist/` folder contains all files needed for distribution:
    - `code.js` - Compiled plugin code
@@ -33,12 +49,12 @@
 
 | Command | Description |
 |---------|-------------|
-| `npm run build` | Build the plugin for production |
-| `npm run watch` | Build and watch for changes |
-| `npm run typecheck` | Run TypeScript type checking |
-| `npm run lint` | Run ESLint |
-| `npm run lint:fix` | Run ESLint with auto-fix |
-| `npm run clean` | Remove the dist folder |
+| `pnpm run build` | Build the plugin for production |
+| `pnpm run watch` | Build and watch for changes |
+| `pnpm run typecheck` | Run TypeScript type checking |
+| `pnpm run lint` | Run ESLint |
+| `pnpm run lint:fix` | Run ESLint with auto-fix |
+| `pnpm run clean` | Remove the dist folder |
 
 ---
 

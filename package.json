@@ -1,17 +1,17 @@
 {
-  "name": "VarSwap",
+  "name": "variable-swap",
   "version": "1.0.0",
-  "description": "Swap variables according to custom mappings.",
+  "description": "Swaps variables using mapping in provided JSON string.",
   "main": "dist/code.js",
   "scripts": {
-    "build": "npm run build:code && npm run build:assets",
+    "build": "pnpm run build:code && pnpm run build:assets",
     "build:code": "esbuild src/main.ts --bundle --outfile=dist/code.js --target=es2017 --format=iife",
-    "build:assets": "cp manifest.json dist/ && cp ui.html dist/",
-    "watch": "npm run build:assets && esbuild src/main.ts --bundle --outfile=dist/code.js --target=es2017 --format=iife --watch",
+    "build:assets": "node -e \"const fs=require('fs');fs.mkdirSync('dist',{recursive:true});fs.copyFileSync('manifest.json','dist/manifest.json');fs.copyFileSync('ui.html','dist/ui.html')\"",
+    "watch": "pnpm run build:assets && esbuild src/main.ts --bundle --outfile=dist/code.js --target=es2017 --format=iife --watch",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src/",
     "lint:fix": "eslint --fix src/",
-    "clean": "rm -rf dist"
+    "clean": "node -e \"const fs=require('fs');fs.rmSync('dist',{recursive:true,force:true})\""
   },
   "author": "",
   "license": "",

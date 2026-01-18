@@ -1,309 +1,313 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>VarSwap</title>
     <style>
-      html, body {
-        height: 100%;
-        margin: 0;
-      }
-      body {
-        font-family: Inter, system-ui, sans-serif;
-        font-size: 12px;
-        padding: 12px;
-        background-color: var(--figma-color-bg);
-        color: var(--figma-color-text);
-        display: flex;
-        flex-direction: column;
-        box-sizing: border-box;
-      }
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
 
-      .json-input {
-        width: 100%;
-        flex: 1;
-        min-height: 100px;
-        padding: 8px;
-        font-family: monospace;
-        font-size: 11px;
-        border: 1px solid var(--figma-color-border);
-        border-radius: 4px;
-        background-color: var(--figma-color-bg);
-        color: var(--figma-color-text);
-        resize: none;
-        box-sizing: border-box;
-      }
+        body {
+            font-family: Inter, system-ui, sans-serif;
+            font-size: 12px;
+            padding: 12px;
+            background-color: var(--figma-color-bg);
+            color: var(--figma-color-text);
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
 
-      .json-input:focus {
-        outline: none;
-        border-color: var(--figma-color-border-selected);
-      }
+        .json-input {
+            width: 100%;
+            flex: 1;
+            min-height: 100px;
+            padding: 8px;
+            font-family: monospace;
+            font-size: 11px;
+            border: 1px solid var(--figma-color-border);
+            border-radius: 4px;
+            background-color: var(--figma-color-bg);
+            color: var(--figma-color-text);
+            resize: none;
+            box-sizing: border-box;
+        }
 
-      .json-input.error {
-        border-color: var(--figma-color-border-danger-strong);
-      }
+        .json-input:focus {
+            outline: none;
+            border-color: var(--figma-color-border-selected);
+        }
 
-      .error-display {
-        margin-top: 8px;
-        padding: 8px;
-        font-size: 11px;
-        color: var(--figma-color-text-danger);
-        background-color: var(--figma-color-bg-danger);
-        border-radius: 4px;
-        display: none;
-        flex-shrink: 0;
-      }
+        .json-input.error {
+            border-color: var(--figma-color-border-danger-strong);
+        }
 
-      .error-display.visible {
-        display: block;
-      }
+        .error-display {
+            margin-top: 8px;
+            padding: 8px;
+            font-size: 11px;
+            color: var(--figma-color-text-danger);
+            background-color: var(--figma-color-bg-danger);
+            border-radius: 4px;
+            display: none;
+            flex-shrink: 0;
+        }
 
-      .run-button {
-        margin-top: 12px;
-        width: 100%;
-        padding: 8px 16px;
-        font-size: 12px;
-        font-weight: 500;
-        border: none;
-        border-radius: 6px;
-        background-color: var(--figma-color-bg-brand);
-        color: var(--figma-color-text-onbrand);
-        cursor: pointer;
-        flex-shrink: 0;
-      }
+        .error-display.visible {
+            display: block;
+        }
 
-      .run-button:hover:not(:disabled) {
-        background-color: var(--figma-color-bg-brand-hover);
-      }
+        .run-button {
+            margin-top: 12px;
+            width: 100%;
+            padding: 8px 16px;
+            font-size: 12px;
+            font-weight: 500;
+            border: none;
+            border-radius: 6px;
+            background-color: var(--figma-color-bg-brand);
+            color: var(--figma-color-text-onbrand);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
 
-      .run-button:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-      }
+        .run-button:hover:not(:disabled) {
+            background-color: var(--figma-color-bg-brand-hover);
+        }
 
-      .scope-section {
-        margin-bottom: 12px;
-        flex-shrink: 0;
-      }
-      .scope-label {
-        display: block;
-        margin-bottom: 6px;
-        font-weight: 500;
-        color: var(--figma-color-text-secondary);
-      }
-      .scope-select {
-        width: 100%;
-        padding: 8px;
-        font-size: 12px;
-        border: 1px solid var(--figma-color-border);
-        border-radius: 4px;
-        background-color: var(--figma-color-bg);
-        color: var(--figma-color-text);
-        cursor: pointer;
-      }
-      .scope-select:focus {
-        outline: none;
-        border-color: var(--figma-color-border-selected);
-      }
+        .run-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .scope-section {
+            margin-bottom: 12px;
+            flex-shrink: 0;
+        }
+
+        .scope-label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: var(--figma-color-text-secondary);
+        }
+
+        .scope-select {
+            width: 100%;
+            padding: 8px;
+            font-size: 12px;
+            border: 1px solid var(--figma-color-border);
+            border-radius: 4px;
+            background-color: var(--figma-color-bg);
+            color: var(--figma-color-text);
+            cursor: pointer;
+        }
+
+        .scope-select:focus {
+            outline: none;
+            border-color: var(--figma-color-border-selected);
+        }
     </style>
-  </head>
-  <body>
-    <div class="scope-section">
-      <label class="scope-label">Scope</label>
-      <select id="scopeSelect" class="scope-select">
+</head>
+<body>
+<div class="scope-section">
+    <label class="scope-label">Scope</label>
+    <select id="scopeSelect" class="scope-select">
         <option value="selection">Selected Nodes</option>
         <option value="page">Current Page</option>
         <option value="document">Full Document</option>
-      </select>
-    </div>
-    <textarea
-      id="jsonInput"
-      class="json-input"
-      placeholder='{"mapping": [{"old": ["var1", "#FFF"], "new": "newVar"}]}'
-    ></textarea>
-    <div id="errorDisplay" class="error-display"></div>
-    <button id="runButton" class="run-button" disabled>Run</button>
+    </select>
+</div>
+<textarea
+        id="jsonInput"
+        class="json-input"
+        placeholder='{"mapping": [{"old": ["var1", "#FFF"], "new": "newVar"}]}'
+></textarea>
+<div id="errorDisplay" class="error-display"></div>
+<button id="runButton" class="run-button" disabled>Run</button>
 
-    <script>
-      // Debounce utility
-      const debounce = (callback, wait) => {
+<script>
+    // Debounce utility
+    const debounce = (callback, wait) => {
         let timeoutId = null;
         return (...args) => {
-          window.clearTimeout(timeoutId);
-          timeoutId = window.setTimeout(() => {
-            callback.apply(null, args);
-          }, wait);
+            window.clearTimeout(timeoutId);
+            timeoutId = window.setTimeout(() => {
+                callback.apply(null, args);
+            }, wait);
         };
-      };
+    };
 
-      // Syntax validation with native JSON.parse
-      function parseSyntax(jsonString) {
+    // Syntax validation with native JSON.parse
+    function parseSyntax(jsonString) {
         if (!jsonString || jsonString.trim() === '') {
-          return { valid: false, error: 'Please enter JSON mapping' };
+            return {valid: false, error: 'Please enter JSON mapping'};
         }
         try {
-          const parsed = JSON.parse(jsonString);
-          return { valid: true, data: parsed };
+            const parsed = JSON.parse(jsonString);
+            return {valid: true, data: parsed};
         } catch (e) {
-          return { valid: false, error: e.message };
+            return {valid: false, error: e.message};
         }
-      }
+    }
 
-      // Schema validation for mapping structure
-      function validateSchema(data) {
+    // Schema validation for mapping structure
+    function validateSchema(data) {
         if (typeof data !== 'object' || data === null || Array.isArray(data)) {
-          return 'JSON must be an object with a "mapping" array';
+            return 'JSON must be an object with a "mapping" array';
         }
         if (!data.mapping) {
-          return 'Missing required field: "mapping"';
+            return 'Missing required field: "mapping"';
         }
         if (!Array.isArray(data.mapping)) {
-          return '"mapping" must be an array';
+            return '"mapping" must be an array';
         }
         if (data.mapping.length === 0) {
-          return '"mapping" array cannot be empty';
+            return '"mapping" array cannot be empty';
         }
         for (let i = 0; i < data.mapping.length; i++) {
-          const entry = data.mapping[i];
-          const prefix = `mapping[${i}]`;
-          if (!entry || typeof entry !== 'object' || Array.isArray(entry)) {
-            return `${prefix}: must be an object`;
-          }
-          if (!('old' in entry)) {
-            return `${prefix}: missing required field "old"`;
-          }
-          const old = entry.old;
-          if (typeof old === 'string') {
-            if (old.trim() === '') {
-              return `${prefix}: "old" cannot be empty`;
+            const entry = data.mapping[i];
+            const prefix = `mapping[${i}]`;
+            if (!entry || typeof entry !== 'object' || Array.isArray(entry)) {
+                return `${prefix}: must be an object`;
             }
-          } else if (Array.isArray(old)) {
-            if (old.length === 0) {
-              return `${prefix}: "old" array cannot be empty`;
+            if (!('old' in entry)) {
+                return `${prefix}: missing required field "old"`;
             }
-            for (let j = 0; j < old.length; j++) {
-              if (typeof old[j] !== 'string' || old[j].trim() === '') {
-                return `${prefix}: old[${j}] must be a non-empty string`;
-              }
+            const old = entry.old;
+            if (typeof old === 'string') {
+                if (old.trim() === '') {
+                    return `${prefix}: "old" cannot be empty`;
+                }
+            } else if (Array.isArray(old)) {
+                if (old.length === 0) {
+                    return `${prefix}: "old" array cannot be empty`;
+                }
+                for (let j = 0; j < old.length; j++) {
+                    if (typeof old[j] !== 'string' || old[j].trim() === '') {
+                        return `${prefix}: old[${j}] must be a non-empty string`;
+                    }
+                }
+            } else {
+                return `${prefix}: "old" must be a string or array of strings`;
             }
-          } else {
-            return `${prefix}: "old" must be a string or array of strings`;
-          }
-          if (!('new' in entry)) {
-            return `${prefix}: missing required field "new"`;
-          }
-          if (typeof entry.new !== 'string' || entry.new.trim() === '') {
-            return `${prefix}: "new" must be a non-empty string`;
-          }
+            if (!('new' in entry)) {
+                return `${prefix}: missing required field "new"`;
+            }
+            if (typeof entry.new !== 'string' || entry.new.trim() === '') {
+                return `${prefix}: "new" must be a non-empty string`;
+            }
         }
         return null;
-      }
+    }
 
-      // Combined validation
-      function validateInput(jsonString) {
+    // Combined validation
+    function validateInput(jsonString) {
         const syntaxResult = parseSyntax(jsonString);
         if (!syntaxResult.valid) {
-          return syntaxResult;
+            return syntaxResult;
         }
         const schemaError = validateSchema(syntaxResult.data);
         if (schemaError) {
-          return { valid: false, error: schemaError };
+            return {valid: false, error: schemaError};
         }
-        return { valid: true, data: syntaxResult.data };
-      }
+        return {valid: true, data: syntaxResult.data};
+    }
 
-      // DOM elements
-      const jsonInput = document.getElementById('jsonInput');
-      const errorDisplay = document.getElementById('errorDisplay');
-      const runButton = document.getElementById('runButton');
-      const scopeSelect = document.getElementById('scopeSelect');
+    // DOM elements
+    const jsonInput = document.getElementById('jsonInput');
+    const errorDisplay = document.getElementById('errorDisplay');
+    const runButton = document.getElementById('runButton');
+    const scopeSelect = document.getElementById('scopeSelect');
 
-      let currentValidData = null;
-      let currentScope = 'selection';
+    let currentValidData = null;
+    let currentScope = 'selection';
 
-      // Handle messages from plugin
-      onmessage = (event) => {
+    // Handle messages from plugin
+    onmessage = (event) => {
         const msg = event.data.pluginMessage;
         if (!msg) return;
 
         if (msg.type === 'mapping-loaded' && msg.json) {
-          jsonInput.value = msg.json;
-          // Trigger validation to enable/disable Run button
-          debouncedValidate(msg.json);
+            jsonInput.value = msg.json;
+            // Trigger validation to enable/disable Run button
+            debouncedValidate(msg.json);
         } else if (msg.type === 'scope-loaded') {
-          currentScope = msg.scope;
-          scopeSelect.value = msg.scope;
+            currentScope = msg.scope;
+            scopeSelect.value = msg.scope;
         } else if (msg.type === 'storage-error') {
-          errorDisplay.textContent = 'Storage error: ' + msg.error;
-          errorDisplay.classList.add('visible');
+            errorDisplay.textContent = 'Storage error: ' + msg.error;
+            errorDisplay.classList.add('visible');
         }
-      };
+    };
 
-      // Request stored mapping and scope on plugin init
-      parent.postMessage({ pluginMessage: { type: 'load-mapping' } }, '*');
-      parent.postMessage({ pluginMessage: { type: 'load-scope' } }, '*');
+    // Request stored mapping and scope on plugin init
+    parent.postMessage({pluginMessage: {type: 'load-mapping'}}, '*');
+    parent.postMessage({pluginMessage: {type: 'load-scope'}}, '*');
 
-      // Update UI based on validation result
-      function updateUI(result) {
+    // Update UI based on validation result
+    function updateUI(result) {
         if (result.valid) {
-          currentValidData = result.data;
-          jsonInput.classList.remove('error');
-          errorDisplay.textContent = '';
-          errorDisplay.classList.remove('visible');
-          runButton.disabled = false;
+            currentValidData = result.data;
+            jsonInput.classList.remove('error');
+            errorDisplay.textContent = '';
+            errorDisplay.classList.remove('visible');
+            runButton.disabled = false;
         } else {
-          currentValidData = null;
-          jsonInput.classList.add('error');
-          errorDisplay.textContent = result.error;
-          errorDisplay.classList.add('visible');
-          runButton.disabled = true;
+            currentValidData = null;
+            jsonInput.classList.add('error');
+            errorDisplay.textContent = result.error;
+            errorDisplay.classList.add('visible');
+            runButton.disabled = true;
         }
-      }
+    }
 
-      // Debounced validation (300ms)
-      const debouncedValidate = debounce((value) => {
+    // Debounced validation (300ms)
+    const debouncedValidate = debounce((value) => {
         const result = validateInput(value);
         updateUI(result);
-      }, 300);
+    }, 300);
 
-      // Debounced draft save (300ms - matches validation debounce)
-      const debouncedSaveDraft = debounce((value) => {
-        parent.postMessage({ pluginMessage: { type: 'save-draft', json: value } }, '*');
-      }, 300);
+    // Debounced draft save (300ms - matches validation debounce)
+    const debouncedSaveDraft = debounce((value) => {
+        parent.postMessage({pluginMessage: {type: 'save-draft', json: value}}, '*');
+    }, 300);
 
-      // Input event listener
-      jsonInput.addEventListener('input', (e) => {
+    // Input event listener
+    jsonInput.addEventListener('input', (e) => {
         debouncedValidate(e.target.value);
         debouncedSaveDraft(e.target.value);
-      });
+    });
 
-      // Scope change event listener
-      scopeSelect.addEventListener('change', (e) => {
+    // Scope change event listener
+    scopeSelect.addEventListener('change', (e) => {
         currentScope = e.target.value;
-        parent.postMessage({ pluginMessage: { type: 'save-scope', scope: currentScope } }, '*');
-      });
+        parent.postMessage({pluginMessage: {type: 'save-scope', scope: currentScope}}, '*');
+    });
 
-      // Run button click handler
-      runButton.addEventListener('click', () => {
+    // Run button click handler
+    runButton.addEventListener('click', () => {
         if (currentValidData) {
-          // Save mapping on run
-          parent.postMessage({
-            pluginMessage: { type: 'save-mapping', json: jsonInput.value }
-          }, '*');
-          // Send run command with scope
-          parent.postMessage({
-            pluginMessage: {
-              type: 'run',
-              mapping: currentValidData.mapping,
-              scope: currentScope
-            }
-          }, '*');
+            // Save mapping on run
+            parent.postMessage({
+                pluginMessage: {type: 'save-mapping', json: jsonInput.value}
+            }, '*');
+            // Send run command with scope
+            parent.postMessage({
+                pluginMessage: {
+                    type: 'run',
+                    mapping: currentValidData.mapping,
+                    scope: currentScope
+                }
+            }, '*');
         }
-      });
+    });
 
-      // Initial state: disabled without error
-      runButton.disabled = true;
-    </script>
-  </body>
+    // Initial state: disabled without error
+    runButton.disabled = true;
+</script>
+</body>
 </html>

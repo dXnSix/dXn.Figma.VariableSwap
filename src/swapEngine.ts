@@ -68,12 +68,13 @@ function buildStyleMappingTables(styleEntries: StyleMapping[]): {
 // Get nodes based on scope mode
 function getNodesForScope(scope: ScopeMode): readonly SceneNode[] {
   switch (scope) {
-    case 'document':
+    case 'document': {
       const allNodes: SceneNode[] = [];
       for (const page of figma.root.children) {
         allNodes.push(...page.children);
       }
       return allNodes;
+    }
     case 'page':
       return figma.currentPage.children;
     case 'selection':

@@ -51,7 +51,7 @@ export async function loadScope(): Promise<ScopeMode> {
       return scope;
     }
     return 'selection';
-  } catch (error) {
+  } catch {
     return 'selection';
   }
 }
