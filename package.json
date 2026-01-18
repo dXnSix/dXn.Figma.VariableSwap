@@ -1,0 +1,29 @@
+{
+  "name": "VarSwap",
+  "version": "1.0.0",
+  "description": "Swap variables according to custom mappings.",
+  "main": "dist/code.js",
+  "scripts": {
+    "build": "npm run build:code && npm run build:assets",
+    "build:code": "esbuild src/main.ts --bundle --outfile=dist/code.js --target=es2017 --format=iife",
+    "build:assets": "cp manifest.json dist/ && cp ui.html dist/",
+    "watch": "npm run build:assets && esbuild src/main.ts --bundle --outfile=dist/code.js --target=es2017 --format=iife --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/",
+    "lint:fix": "eslint --fix src/",
+    "clean": "rm -rf dist"
+  },
+  "author": "",
+  "license": "",
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "@figma/eslint-plugin-figma-plugins": "*",
+    "@figma/plugin-typings": "^1.122.0",
+    "@typescript-eslint/eslint-plugin": "^8.53.0",
+    "@typescript-eslint/parser": "^8.53.0",
+    "esbuild": "^0.27.2",
+    "eslint": "^9.39.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.53.0"
+  }
+}
