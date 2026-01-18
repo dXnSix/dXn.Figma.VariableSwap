@@ -1,27 +1,17 @@
 import { processNode } from './nodeProcessor';
-import type {
-  MappingInput,
+import {
   ParsedMapping,
   VariableMapping,
   StyleMapping,
   VariableMappingTable,
   StyleMappingTable,
-  ScopeMode,
+  ScopeMode, MappingInput,
 } from './helpers/types';
 
-// Detect if input is legacy format (array) or new format (object with variables/styles)
-function isLegacyFormat(input: MappingInput): input is VariableMapping[] {
-  return Array.isArray(input);
-}
+
 
 // Parse input mapping to unified format
 function parseMapping(input: MappingInput): ParsedMapping {
-  if (isLegacyFormat(input)) {
-    return {
-      variables: input,
-      styles: [],
-    };
-  }
   return {
     variables: input.variables || [],
     styles: input.styles || [],

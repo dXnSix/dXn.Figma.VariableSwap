@@ -17,16 +17,10 @@ export type StyleMapping = {
 export type ScopeMode = 'selection' | 'page' | 'document';
 
 // New unified format (Option A)
-export type FullMapping = {
+export type MappingInput = {
   variables?: VariableMapping[];
   styles?: StyleMapping[];
 };
-
-// Legacy format is just VariableMapping[]
-export type LegacyMapping = VariableMapping[];
-
-// Input can be either format
-export type MappingInput = FullMapping | LegacyMapping;
 
 // Parsed mapping passed to swap engine
 export type ParsedMapping = {
