@@ -9,8 +9,11 @@ export function colorsMatch(color1: RGB, color2: RGB, tolerance: number = COLOR_
   );
 }
 
-// Try to parse a source string as a color (hex or rgba)
-// Returns RGB | null - returns null for variable names or invalid colors
+/**
+ * Attempts to parse a color from a string.
+ * @param source
+ * @returns RGB object if parsing is successful, otherwise null.
+ */
 export function tryParseColor(source: string): RGB | null {
   const trimmed = source.trim().toLowerCase();
   if (!trimmed.startsWith('#') && !trimmed.startsWith('rgb')) {

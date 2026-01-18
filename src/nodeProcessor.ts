@@ -1,8 +1,8 @@
-import { findMatchingNewVariable, findMatchingNewVariableForStroke } from './matchingEngine';
-import { findVariableByName } from './variableLookup';
-import { processScalarVariables } from './variableProcessor';
-import { processStyles } from './styleProcessor';
-import type { VariableMappingTable, StyleMappingTable } from './types';
+import { findMatchingNewVariable, findMatchingNewVariableForStroke } from './variables/matchingEngine';
+import { findVariableByName } from './variables/variableLookup';
+import { processScalarVariables } from './variables/variableProcessor';
+import { processStyles } from './styles/styleProcessor';
+import type { VariableMappingTable, StyleMappingTable } from './helpers/types';
 
 type StyleMappings = {
   paint: StyleMappingTable;

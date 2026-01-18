@@ -7,7 +7,7 @@ import type {
   VariableMappingTable,
   StyleMappingTable,
   ScopeMode,
-} from './types';
+} from './helpers/types';
 
 // Detect if input is legacy format (array) or new format (object with variables/styles)
 function isLegacyFormat(input: MappingInput): input is VariableMapping[] {

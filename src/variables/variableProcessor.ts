@@ -1,6 +1,6 @@
 import { findVariableByName } from './variableLookup';
-import type { VariableMappingTable, ScalarProperty } from './types';
-import { ALL_SCALAR_PROPERTIES as SCALAR_PROPS } from './types';
+import type { VariableMappingTable, ScalarProperty } from '../helpers/types';
+import { ALL_SCALAR_PROPERTIES as SCALAR_PROPS } from '../helpers/types';
 
 // Check if a property exists and is bindable on the node
 function hasProperty(node: SceneNode, property: string): boolean {

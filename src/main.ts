@@ -1,6 +1,6 @@
 import { runSwap } from './swapEngine';
-import { loadMapping, saveMapping, saveDraft, loadScope, saveScope } from './storage';
-import type { UIMessage, PluginMessage } from './types';
+import { loadMapping, saveMapping, saveDraft, loadScope, saveScope } from './helpers/storage';
+import type { UIMessage, PluginMessage } from './helpers/types';
 
 // Show the plugin UI
 figma.showUI(__html__, { width: 400, height: 390, themeColors: true });

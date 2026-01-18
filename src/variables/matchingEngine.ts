@@ -1,5 +1,5 @@
-import { colorsMatch, tryParseColor } from './colorUtils';
-import type { VariableMappingTable } from './types';
+import { colorsMatch, tryParseColor } from '../helpers/colorUtils';
+import type { VariableMappingTable } from '../helpers/types';
 
 // Find matching new variable for a fill (checks bound variable first, then hardcoded color)
 export async function findMatchingNewVariable(

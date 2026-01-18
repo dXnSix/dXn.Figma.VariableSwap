@@ -4,7 +4,7 @@ import {
   findEffectStyleByName,
   findGridStyleByName,
 } from './styleLookup';
-import type { StyleMappingTable } from './types';
+import type { StyleMappingTable } from '../helpers/types';
 
 type StyleMappings = {
   paint: StyleMappingTable;
